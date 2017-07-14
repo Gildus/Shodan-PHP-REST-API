@@ -290,7 +290,7 @@ class Shodan
 	 * @param array $headers;
 	 * @return array $head;
 	 */
-	private function _parseHeaders(array $headers) : array
+	private function _parseHeaders(array $headers)
     {
 		$head = [];
 		foreach ($headers as $k => $v) {
