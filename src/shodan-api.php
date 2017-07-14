@@ -4,7 +4,7 @@
 require_once 'Colors.php';
 require_once 'Shodan.php';
 
-$key = '';
+$key = 'Insert your API key here';
 $client = new Shodan($key, TRUE);
 $colors = new Colors();
 
@@ -13,23 +13,22 @@ $colors = new Colors();
 /**
  * Usage.
  * Auto-generate the usage for CLI.
- * 
+ *
  * @param Shodan $client;
  * @return void;
  */
 function usage(Shodan $client) {
 	echo 'Usage:'."\n";
-	
 	echo "\t".'-r, --run-tests'."\n";
 	echo "\t".'-t, --run-test STRING'."\n";
 	foreach ($client->getApis() as $method => $methodConf) {
 		echo "\t".'-m, --method '.$method.' ';
-		
+
 		foreach ($methodConf as $parameter => $parameterConf) {
 			if ($parameter == 'rest') {
 			    continue;
             }
-			
+
 			if ($parameterConf['optional'] == Shodan::PARAMETER_OPTIONAL) {
 			    echo '[';
             }
@@ -39,10 +38,10 @@ function usage(Shodan $client) {
             }
 			echo ' ';
 		}
-		
+
 		echo "\n";
 	}
-	
+
 	exit(1);
 }
 
@@ -63,7 +62,7 @@ $options = getopt('rt:m:', array_merge([
 
 // Run all the tests
 if (isset($options['run-tests']) || isset($options['r'])) {
-	foreach (glob('tests/*.php') as $test) {
+    foreach (glob('tests/*.php') as $test) {
 		require_once $test;
 	}
 
@@ -85,7 +84,7 @@ if (isset($options['run-tests']) || isset($options['r'])) {
 	if (!in_array('tests/'.$test.'.php', glob('tests/*.php'))) {
 	    usage($client);
     }
-	
+
 	require_once 'tests/'.$test.'.php';
 	
 // Run a specific method

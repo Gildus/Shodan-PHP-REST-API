@@ -447,7 +447,7 @@ class Shodan
 	 */
 	private function _requestStream($url, $post = [], $options = [])
     {
-		$handle = fopen(
+        $handle = fopen(
 			$url, 
 			'r', 
 			FALSE, 
