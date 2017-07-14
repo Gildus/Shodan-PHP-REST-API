@@ -18,9 +18,9 @@ $colors = new Colors();
  * @return void;
  */
 function usage(Shodan $client) {
-	echo 'Usage:'."\n";
-	echo "\t".'-r, --run-tests'."\n";
-	echo "\t".'-t, --run-test STRING'."\n";
+	echo 'Usage:' . PHP_EOL;
+	echo "\t".'-r, --run-tests' . PHP_EOL;
+	echo "\t".'-t, --run-test STRING' . PHP_EOL;
 	foreach ($client->getApis() as $method => $methodConf) {
 		echo "\t".'-m, --method '.$method.' ';
 
@@ -39,7 +39,7 @@ function usage(Shodan $client) {
 			echo ' ';
 		}
 
-		echo "\n";
+		echo PHP_EOL;
 	}
 
 	exit(1);

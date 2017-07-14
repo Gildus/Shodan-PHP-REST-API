@@ -427,13 +427,19 @@ class Shodan
 	 */
 	private function _request($url, $post = [], $options = [])
     {
-		$response = @file_get_contents(
-			$url,
-			FALSE,
-			$this->_requestContext($post, $options)
-		);
-		
-		return $this->_responseSuccess($http_response_header, $response);
+        try {
+            $response = @file_get_contents(
+                $url,
+                FALSE,
+                $this->_requestContext($post, $options)
+            );
+
+            return $this->_responseSuccess($http_response_header, $response);
+        } catch (Exception $ex) {
+            return [
+                $ex->getMessage()
+            ];
+        }
 	}
 	
 	/**
@@ -447,22 +453,23 @@ class Shodan
 	 */
 	private function _requestStream($url, $post = [], $options = [])
     {
-        $handle = fopen(
-			$url, 
-			'r', 
-			FALSE, 
-			$this->_requestContext($post, $options)
-		);
-		
-		$firstLine = fgets($handle);
-		$this->_responseSuccess($http_response_header, $firstLine);
-		
-		// No errors detected, stream the output
-		echo $firstLine;
-		fpassthru($handle);
-		fclose($handle);
+        try {
+            if ($handle = fopen($url, 'r', FALSE, $this->_requestContext($post, $options))) {
+                $firstLine = fgets($handle);
+                $this->_responseSuccess($http_response_header, $firstLine);
 
-		return $firstLine;
+                // No errors detected, stream the output
+                echo $firstLine;
+                fpassthru($handle);
+                fclose($handle);
+
+                return $firstLine;
+            }
+        } catch (Exception $ex) {
+            return $ex->getMessage();
+        }
+
+        return FALSE;
 	}
 
     /**
@@ -508,7 +515,7 @@ class Shodan
 		}
 		
 		// Compose query string
-		$query = '?key='.$this->apiKey;
+		$query = '?key='.urlencode($this->apiKey);
 		$post = [];
 		
 		if (count($args) > 0) {
