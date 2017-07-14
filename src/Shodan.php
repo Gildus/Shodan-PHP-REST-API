@@ -32,7 +32,7 @@ class Shodan
 	 * Shodan methods.
 	 * @var array $_api;
 	 */
-	private $_api = array(
+	private $_api = [
 		'ShodanHost' => [
 			'rest' => self::REST_API,
 			
@@ -263,16 +263,15 @@ class Shodan
 				'position' => self::POSITION_GET,
 			],
 		],
-	);
-	
-	/**
-	 * Construct.
-	 * \fn __construct($apiKey, $returnType = FALSE)
-	 * 
-	 * @param string $apiKey;
-	 * @param bool $returnType;
-	 * @return void;
-	 */
+	];
+
+    /**
+     * Construct.
+     * \fn __construct($apiKey, $returnType = FALSE)
+     *
+     * @param string $apiKey ;
+     * @param bool $returnType ;
+     */
 	public function __construct($apiKey, $returnType = FALSE)
     {
 		$this->apiUrl = 'https://api.shodan.io';
@@ -302,7 +301,7 @@ class Shodan
 			} else {
 				$head[] = $v;
 				if (preg_match('|HTTP/[0-9\.]+\s+([0-9]+)|', $v, $out)) {
-					$head['reponse_code'] = intval($out[1]);
+					$head['response_code'] = intval($out[1]);
 				}
 			}
 		}
@@ -316,7 +315,7 @@ class Shodan
 	 * 
 	 * @param array $post;
 	 * @param array $options;
-	 * @return object $options;
+	 * @return object|resource $options;
 	 */
 	private function _requestContext($post = [], $options = [])
     {
@@ -350,7 +349,7 @@ class Shodan
 	private function _responseSuccessHTTP($headers)
     {
 		$responseHeaders = $this->_parseHeaders($headers);
-		if ($responseHeaders['reponse_code'] != 200) {
+		if ($responseHeaders['response_code'] != 200) {
 			return $responseHeaders[0];
 		}
 		
@@ -361,8 +360,8 @@ class Shodan
 	 * Response Success API.
 	 * \fn _responseSuccessAPI($responseDecoded)
 	 * 
-	 * @param string $responseDecoded;
-	 * @return TRUE;
+	 * @param array $responseDecoded;
+	 * @return string|bool;
 	 */
 	private function _responseSuccessAPI($responseDecoded)
     {
@@ -372,15 +371,16 @@ class Shodan
 		
 		return TRUE;
 	}
-	
-	/**
-	 * Response Success.
-	 * \fn _responseSuccess($headers, $response)
-	 * 
-	 * @param array $headers;
-	 * @param string $response;
-	 * @return string $responseDecoded;
-	 */
+
+    /**
+     * Response Success.
+     * \fn _responseSuccess($headers, $response)
+     *
+     * @param array $headers;
+     * @param string $response;
+     * @return array $responseDecoded;
+     * @throws Exception
+     */
 	private function _responseSuccess($headers, $response)
     {
 		// Check for HTTP errors
@@ -442,10 +442,10 @@ class Shodan
 	 * 
 	 * @param string $url;
 	 * @param array $post;
-	 * @param bool $options;
-	 * @return void;
+	 * @param array $options;
+	 * @return bool|string;
 	 */
-	private function _requestStream($url, $post = [], $options = FALSE)
+	private function _requestStream($url, $post = [], $options = [])
     {
 		$handle = fopen(
 			$url, 
@@ -461,16 +461,19 @@ class Shodan
 		echo $firstLine;
 		fpassthru($handle);
 		fclose($handle);
+
+		return $firstLine;
 	}
-	
-	/**
-	 * Call function.
-	 * \fn __call($method, $args)
-	 * 
-	 * @param string $method;
-	 * @param array $args;
-	 * @return array $url.$query, $post;
-	 */
+
+    /**
+     * Call function.
+     * \fn __call($method, $args)
+     *
+     * @param string $method;
+     * @param array $args;
+     * @return array|bool|string $url.$query, $post;
+     * @throws Exception
+     */
 	public function __call(string $method, array $args)
     {
 		if (!isset($this->_api[$method])) {
@@ -480,8 +483,8 @@ class Shodan
 		// Handle overlapping methods (see: https://github.com/ScadaExposure/Shodan-PHP-REST-API#handle-overlapping-methods)
 		$url = preg_replace_callback(
 			'|\_.*$|',
-			function ($matches) {
-    				return "";
+			function () {
+                return "";
 			},
 			$method
 		);
@@ -490,7 +493,7 @@ class Shodan
 		$url = preg_replace_callback(
 			'|([A-Z])|',
 			function ($matches) {
-    				return "/".strtolower($matches[0]);
+                return "/".strtolower($matches[0]);
 			},
 			$url
 		);		
@@ -548,7 +551,7 @@ class Shodan
 	 * Get Apis.
 	 * \fn getApis()
 	 * 
-	 * @return $_api;
+	 * @return array $_api;
 	 */
 	public function getApis()
     {
