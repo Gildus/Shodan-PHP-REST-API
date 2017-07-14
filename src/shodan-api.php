@@ -4,7 +4,7 @@
 require_once 'Colors.php';
 require_once 'Shodan.php';
 
-$key = 'NGwgRhaP1kS1DjeEelSRTQXlmYf3svVv';
+$key = '';
 $client = new Shodan($key, TRUE);
 $colors = new Colors();
 

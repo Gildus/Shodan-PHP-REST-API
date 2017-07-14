@@ -474,7 +474,7 @@ class Shodan
      * @return array|bool|string $url.$query, $post;
      * @throws Exception
      */
-	public function __call(string $method, array $args)
+	public function __call($method, array $args)
     {
 		if (!isset($this->_api[$method])) {
 			throw new Exception('Unknown method: '.$method);
