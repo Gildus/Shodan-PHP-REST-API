@@ -9,7 +9,7 @@ try {
 		'ip' => '69.171.230.68', // https://www.facebook.com/
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 echo $colors->getColoredString('IP SEARCH WITH HISTORY:', 'black', 'green');
@@ -19,7 +19,7 @@ try {
 		'history' => TRUE,
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 echo $colors->getColoredString('IP SEARCH WITH MINIFY:', 'black', 'green');
@@ -29,7 +29,7 @@ try {
 		'minify' => TRUE,
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 echo $colors->getColoredString('IP SEARCH WITH HISTORY AND !MINIFY:', 'black', 'green');
@@ -40,7 +40,7 @@ try {
 		'minify' => FALSE,
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 echo $colors->getColoredString('IP SEARCH WITH !HISTORY AND MINIFY:', 'black', 'green');
@@ -51,5 +51,5 @@ try {
 		'minify' => TRUE,
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }

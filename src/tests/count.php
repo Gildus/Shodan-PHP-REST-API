@@ -9,7 +9,7 @@ try {
 		'query' => 'Niagara Web Server',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage() . PHP_EOL;
 }
 
 /*
@@ -21,7 +21,7 @@ try {
 		'query' => 'Niagara Web Server country:"IT"',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage() . PHP_EOL;
 }
 
 /*
@@ -33,7 +33,7 @@ try {
 		'query' => 'Niagara Web Server country:"US"',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage() . PHP_EOL;
 }
 
 /*
@@ -46,5 +46,5 @@ try {
 		'facets' => 'country:10',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage() . PHP_EOL;
 }

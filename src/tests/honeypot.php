@@ -10,5 +10,5 @@ try {
 		'ip' => '54.231.184.227', // http://mushmush.org/
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }

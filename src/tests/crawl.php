@@ -9,7 +9,7 @@ try {
 		'ips' => '69.171.230.0/24',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 /*
@@ -22,7 +22,7 @@ try {
 		'protocol' => 'dns-tcp',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 /*
@@ -34,7 +34,7 @@ try {
 		'id' => '4I1LK2YHAY3PLWJ6',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 /*
@@ -44,6 +44,6 @@ echo $colors->getColoredString('SERVICES CRAWLED:', 'black', 'green');
 try {
 	var_dump($client->ShodanServices());
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 

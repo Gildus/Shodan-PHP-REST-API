@@ -9,7 +9,7 @@ try {
 		'page' => '1', 
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
 /*
@@ -21,5 +21,5 @@ try {
 		'query' => 'fax',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }

@@ -6,9 +6,10 @@
  * 
  * This class define shell colors.
  */
-class Colors {
+class Colors
+{
 	// Shell colors
-	private $foregroundColors = array(
+	private $foregroundColors = [
 		'black' => '0;30',
 		'dark_gray' => '1;30',
 		'blue' => '0;34',
@@ -25,9 +26,9 @@ class Colors {
 		'yellow' => '1;33',
 		'light_gray' => '0;37',
 		'white' => '1;37'
-	);
+	];
 	
-	private $backgroundColors = array(
+	private $backgroundColors = [
 		'black' => '40',
 		'red' => '41',
 		'green' => '42',
@@ -36,7 +37,7 @@ class Colors {
 		'magenta' => '45',
 		'cyan' => '46',
 		'light_gray' => '47'
-	);
+	];
 	
 	/**
 	 * Get colored string.
@@ -46,14 +47,12 @@ class Colors {
 	 * @param bool $backgroundColor;
 	 * @return string $buffer.$string;
 	 */
-	public function getColoredString($string, $foregroundColor = FALSE, $backgroundColor = FALSE) {
+	public function getColoredString($string, $foregroundColor = FALSE, $backgroundColor = FALSE)
+    {
 		$buffer = '';
 		
 		// Check if given foreground color found
-		if (
-			$foregroundColor &&
-			isset($this->foregroundColors[$foregroundColor])
-		) {
+		if ($foregroundColor && isset($this->foregroundColors[$foregroundColor])) {
 			$buffer .= "\033[".$this->foregroundColors[$foregroundColor]."m";
 		}
 		

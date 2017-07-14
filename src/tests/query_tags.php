@@ -9,6 +9,6 @@ try {
 		'size' => '30',
 	)));
 } catch (Exception $e) {
-	echo $e->getMessage()."\n";
+	echo $e->getMessage(). PHP_EOL;
 }
 
